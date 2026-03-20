@@ -1,6 +1,10 @@
 <template>
   <div>
-    <Beverage :isIced="currentTemp === 'Cold'" />
+    <Beverage :isIced="currentTemp === 'Cold'" 
+              :base="currentBase"
+              :creamer="currentCreamer"
+              :syrup="currentSyrup"
+    />
     <ul>
       <li>
         <template v-for="temp in temps" :key="temp">
@@ -29,19 +33,6 @@
           </label>
         </template>
       <li>
-        <template v-for="creamer in creamers" :key="creamer.id">
-          <label>
-            <input
-              type="radio"
-              name="creamer"
-              :value="creamer"
-              v-model="currentCreamer"
-            />
-            {{ creamer.name }}
-          </label>
-        </template>
-      </li>
-      <li>
         <template v-for="syrup in syrups" :key="syrup.id">
           <label>
             <input
@@ -54,6 +45,19 @@
           </label>
         </template>
       </li>
+      <li>
+        <template v-for="creamer in creamers" :key="creamer.id">
+          <label>
+            <input
+              type="radio"
+              name="creamer"
+              :value="creamer"
+              v-model="currentCreamer"
+            />
+            {{ creamer.name }}
+          </label>
+        </template>
+      </li>
     </ul>
   </div>
 </template>
@@ -63,9 +67,9 @@ import Beverage from "./components/Beverage.vue";
 import { temps, currentTemp, bases, creamers, syrups } from "./stores/beverage";
 import { ref } from "vue";
 
-const currentBase = ref(bases.value[0]);
-const currentCreamer = ref(creamers.value[0]);
-const currentSyrup = ref(syrups.value[0]);
+const currentBase = ref(bases.value[1]);
+const currentCreamer = ref(creamers.value[1]);
+const currentSyrup = ref(syrups.value[1]);
 </script>
 
 <style lang="scss">
